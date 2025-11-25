@@ -1,0 +1,64 @@
+Project Title : Double Machine Learning for Heterogeneous Treatment Effects
+
+Project Overview
+
+This project implements Double Machine Learning (DML) to estimate heterogeneous treatment effects in a synthetic high-dimensional dataset. It includes data generation, cross-fitted machine learning, CATE estimation, sensitivity analysis, and structured documentation for reproducibility and transparency.
+
+
+
+Files and Structure
+
+1) data_generation.py : Script to generate synthetic data (`synthetic_data.csv`) with 2000 samples, 50+ confounders, treatment assignment, and continuous outcome.
+2) dml_implementation.py : Implements cross-fitting DML using Random Forests for nuisance parameter estimation; saves out-of-fold predictions (`dml_crossfit_residuals.npz`).
+3) cate_estimation.py : Calculates residuals and estimates Conditional Average Treatment Effect (CATE); outputs to `cate_estimates.csv`.
+4) sensitivity_analysis.py : Analyzes CATE variation across subgroups (X1, X2, X3); results saved to `sensitivity_analysis_stdout.txt`.
+5) requirements.txt : Lists dependencies (numpy, pandas, scikit-learn, tested on Python 3.7.8).
+
+
+How to Run
+
+1. **Install dependencies:**
+   
+   pip install -r requirements.txt
+   
+2. **Generate synthetic data:**
+   
+   python data_generation.py
+   
+3. **Compute nuisance estimates with DML:**
+   
+   python dml_implementation.py
+   
+4. **Estimate CATE:**
+   
+   python cate_estimation.py
+   
+5. **Sensitivity analysis:**
+   
+   python sensitivity_analysis.py
+   
+
+
+
+Outputs
+
+1) synthetic_data.csv : Main dataset with covariates, treatment, and outcomes.
+2) dml_crossfit_residuals.npz : Out-of-fold model predictions.
+3) cate_estimates.csv : Dataset including estimated treatment effects.
+4) sensitivity_analysis_stdout.txt : Mean CATE for subgroups of X1, X2, and X3.
+
+
+
+Documentation
+
+    Data generation, modeling choices, cross-fitting strategy, and interpretations are documented within each script and summarized in this submission file.
+
+
+
+Report Summary
+
+1) Synthetic dataset contains nonlinear, heterogeneous treatment effects.
+2) DML with cross-fitting corrects for bias in high-dimensional settings.
+3) Linear regression of residualized outcome on residualized treatment delivers the CATE.
+4) Sensitivity analysis confirms heterogeneity of the treatment effect with respect to covariates X1, X2, and X3.
+5) All steps are reproducible with provided scripts.
